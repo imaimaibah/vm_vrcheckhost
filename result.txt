@@ -1,0 +1,7 @@
+name	instance_name	host_id	network_id	name	instance_name	host_id	network_id
+r-447-VM	r-447-VM	11	204	cl-st-005	i-5-465-VM	11	204
+r-447-VM	r-447-VM	11	204	cl-st-006	i-5-466-VM	11	204
+r-447-VM	r-447-VM	11	202	v-491-VM	v-491-VM	11	202
+r-448-VM	r-447-VM	11	200	v-491-VM	v-491-VM	11	200
+r-448-VM	r-447-VM	12	205	cl-st-007	i-6-465-VM	11	205
+r-448-VM	r-447-VM	12	206	cl-st-010	i-6-466-VM	11	206
