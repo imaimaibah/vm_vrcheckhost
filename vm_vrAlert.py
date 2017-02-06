@@ -2,7 +2,6 @@
 
 import os
 from pathlib import Path
-import re
 import exec_sql
 import format_json
 #from exec_sql import *
@@ -10,8 +9,12 @@ import format_json
 
 
 if __name__ == "__main__":
-	fj = format_json.FormatJson()
-	print(fj.readFile())
-
 	s = exec_sql.ExecSQL()
-	print(s.data)
+	data = s.structDataFromSQL()
+
+	j = format_json.FormatJson()
+	j.readFile("./vm_vrResult1.json")
+	j.data.update(data)
+	j.dumpInJson("./vm_vrResult2.json",j.data)	
+
+

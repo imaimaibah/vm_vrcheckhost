@@ -1,5 +1,6 @@
 import time
 import os 
+import re
 
 class ExecSQL:
 
@@ -11,10 +12,15 @@ class ExecSQL:
 
 	def structDataFromSQL(self):
 		localtime = int(time.time())
+		localtime = str(localtime)
 		data_s = {localtime: {}}
 		f = self.readData("cat result.txt")
 		for line in f.readlines():
-			structData(line)
+			self.structData(line)
+
+		for key in self.data:
+			self.data[key]['network_id'] = list(self.data[key]['network_id'])
+			self.data[key]['vm_name'] = list(self.data[key]['vm_name'])
 
 		data_s[localtime] = self.data
 
@@ -31,12 +37,10 @@ class ExecSQL:
 			vm_instance_name = element[5]
 
 			if vr_name not in self.data:
-				self.data[vr_name] = {'host': onHost, 'network_id': set(), 'vm_name':set()}
+				self.data[vr_name] = {'host': onHost, 'network_id': {network_id}, 'vm_name':{vm_name}}
+			else:
+				self.data[vr_name]['network_id'].update({network_id})
+				self.data[vr_name]['vm_name'].update([vm_name])
 
-			self.data[vr_name]['network_id'].add(network_id)
-			self.data[vr_name]['vm_name'].add(vm_name)
 
-		for key in self.data:
-			self.data[key]['network_id'] = list(self.data[key]['network_id'])
 
-		self.data[key]['vm_name'] = list(sel.fdata[key]['vm_name'])

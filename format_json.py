@@ -3,20 +3,22 @@ import json
 
 class FormatJson:
 	def __init__(self):
-		pass
+		self.data = {}
 
-	def readFile(self):
-		my_file = Path("./vm_vrResult.json")
+	def readFile(self,file):
+		my_file = Path(file)
 		if my_file.is_file():
-			with open('vm_vrResult.json') as data_file:    
-				oldData = json.load(data_file)
+			with open(my_file) as data_file:    
+				self.data = json.load(data_file)
+			return 1
+		else:
+			return 0
 
-		return oldData
-
-	def parseJson():
+	def parseJson(self):
 		pass
 
-	def dumpInJson():
-		with open('vm_vrResult.json', 'w') as outfile:
-			json.dump(data,outfile)
+	def dumpInJson(self,file,data):
+		with open(file, 'w') as outfile:
+			outfile.write(json.dumps(data,sort_keys=True, indent=4))
+
 
