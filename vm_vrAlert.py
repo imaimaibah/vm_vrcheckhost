@@ -4,7 +4,14 @@ import os
 from pathlib import Path
 import exec_sql
 import format_json
+from search_duplication import SearchDuplication
 #from exec_sql import *
+
+inputFile = "./vm_vrResult1.json"
+outputFile = "./vm_vrResult2.json"
+
+jsonFile = "./vm_vrResult.json"
+outputLog = "./vm_vr.log"
 
 
 
@@ -13,8 +20,14 @@ if __name__ == "__main__":
 	data = s.structDataFromSQL()
 
 	j = format_json.FormatJson()
-	j.readFile("./vm_vrResult1.json")
+	j.readFile(inputFile)
+	d = SearchDuplication()
+	d.searchDup(j.data,data)
+	
 	j.data.update(data)
-	j.dumpInJson("./vm_vrResult2.json",j.data)	
+	j.dumpInJson(outputFile,j.data)	
+
+
+
 
 

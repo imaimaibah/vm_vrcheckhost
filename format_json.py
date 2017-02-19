@@ -19,6 +19,5 @@ class FormatJson:
 
 	def dumpInJson(self,file,data):
 		with open(file, 'w') as outfile:
-			outfile.write(json.dumps(data,sort_keys=True, indent=4))
-
+			outfile.write(json.dumps(data, sort_keys=True, indent=4))
 
