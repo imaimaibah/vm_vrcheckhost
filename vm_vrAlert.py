@@ -17,15 +17,16 @@ outputLog = "./vm_vr.log"
 
 if __name__ == "__main__":
 	s = exec_sql.ExecSQL()
-	data = s.structDataFromSQL()
+	new_data = s.structDataFromSQL()
 
 	j = format_json.FormatJson()
 	j.readFile(inputFile)
-	d = SearchDuplication()
-	d.searchDup(j.data,data)
+
+	d = SearchDuplication(j.data,new_data)
+	d.searchNewVMs()
 	
-	j.data.update(data)
-	j.dumpInJson(outputFile,j.data)	
+	#j.data.update(data)
+	#j.dumpInJson(outputFile,j.data)	
 
 
 
