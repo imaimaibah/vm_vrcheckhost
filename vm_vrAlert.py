@@ -5,6 +5,7 @@ from pathlib import Path
 import exec_sql
 import format_json
 from search_duplication import SearchDuplication
+from log_write import LogWrite
 #from exec_sql import *
 
 inputFile = "./vm_vrResult1.json"
@@ -19,11 +20,14 @@ if __name__ == "__main__":
 	s = exec_sql.ExecSQL()
 	new_data = s.structDataFromSQL()
 
-	j = format_json.FormatJson()
-	j.readFile(inputFile)
+	h = format_json.FormatJson()
+	h.readFile(inputFile)
 
-	d = SearchDuplication(j.data,new_data)
-	d.searchNewVMs()
+	i = SearchDuplication(h.data,new_data)
+	new_vms = i.searchNewVMs()
+
+	n = LogWrite(outputLog)
+	n.logWrite(new_vms)
 	
 	#j.data.update(data)
 	#j.dumpInJson(outputFile,j.data)	
