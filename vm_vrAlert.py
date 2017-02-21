@@ -6,7 +6,6 @@ import exec_sql
 import format_json
 from search_duplication import SearchDuplication
 from log_write import LogWrite
-#from exec_sql import *
 
 inputFile = "./vm_vrResult1.json"
 outputFile = "./vm_vrResult2.json"
@@ -28,11 +27,6 @@ if __name__ == "__main__":
 
 	n = LogWrite(outputLog)
 	n.logWrite(new_vms)
-	
+
 	#j.data.update(data)
-	#j.dumpInJson(outputFile,j.data)	
-
-
-
-
-
+	#j.dumpInJson(outputFile,j.data)

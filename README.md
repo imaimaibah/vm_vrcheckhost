@@ -1,23 +1,24 @@
-Overview
+概要
 ========
 
 このスクリプトは同じネットワークに所属しているVMとVRが同じHost上で起動している場合にその情報をファイルに出力する。  
-マイグレーション対象の
+マイグレーション対象のVMをログに出力のみ。通知は監視サーバ等と連携する必要がある。  
+過去に同一VMがアラートとして通知されていた場合はそのVMは通知対象から一定時間(Cronによる指定実行回数)除外。
 
-Specification
+機能
 =============
 
 下記のSQLを実行し、結果をデータ化。
 世代数(Default:5)分を遡って、同じVMがあるかチェックする。
 過去に同じVMがない場合はログへアラートを出力する。
 
-*** トリガー: ***  
+***トリガー:***  
 実行はCronによる定期実行とする。
 
-*** オプション: ***  
+***オプション:***  
 引数指定で世代数(Retension)を設定できるようにする。
 
-*** SQL: ***  
+***SQL:***  
 下記のSQLより取得した結果を元にデータを形成。オプションにより指定の世代数分残してJSON形式で結果を保存。
 ```
 select * from
@@ -33,8 +34,9 @@ left join
 on q1.host_id = q2.host_id and q1.network_id = q2.network_id;
 ```
 
-*** データフォーマット(JSON): ***  
-JSONのデータフォーマットは以下。
+***保存履歴のデータフォーマット(JSON):***  
+保存履歴はファイルで保存する。  
+データフォーマットは以下。
 データは古い順にソートして保存。
 
 ```
@@ -63,7 +65,9 @@ JSONのデータフォーマットは以下。
 }
 ```
 
-ログフォーマットは以下(2月3日時点参考)。(英語)
+***ログフォーマット***  
+ログフォーマットは以下(2月3日時点参考)。(英語)  
+ログファイル名はスクリプト内に記載。
 ```
 YYYY-MM-DD HH:MM:SS <vm_id1> is running on the same host where <vr1_id>.
 YYYY-MM-DD HH:MM:SS <vm_id2> is running on the same host where <vr1_id>.
@@ -72,16 +76,17 @@ YYYY-MM-DD HH:MM:SS <vm_id3> is running on the same host where <vr1_id>.
 マイグレーション対象毎にログを1行出力する。
 上記のフォーマット例ではvm_id1、vm_id2、vm_id3がマイグレーションの対象となる。
 
-How to use  
+利用方法  
 ==========
-python -m vm_vrAlert.py `<num>`
+python -m vm_vrAlert `<num>`
 
 `<num>`は世代数を指定。デフォルトで5世代残す。
 
-vm_vrAlert.pyファイル内に`jsonFile`,`outputLog`と定義。
+パラメータはvm_vrAlert.pyファイル内に`jsonFile`,`outputLog`と定義。  
+それぞれの説明は以下。
 
 `jsonFile` = 過去の結果を世代数分記録するためのファイル。  
-`outputLog` =  ログの吐き出し先。  
+`outputLog` =  ログの吐き出し先 。  
 
 Coding Policy  
 =============
@@ -91,5 +96,31 @@ Coding Policy
 変数名は名詞で開始。名詞単語の区切りには(アンダースコア)で区切る事とする。  
 クラス名、関数名(Method)は動詞で開始する。  
 
-Class/Method  
+
+ファイル一覧
 ============
+vm_vrAlert.py  
+format_json.py  
+
+
+
+クラス/メソッド  
+============
+***Main***  
+==ファイル名: vm_vrAlert.py==
+
+
+***SQL Execution***  
+==ファイル名: exec_sql.py==  
+
+***JSON format output***  
+ファイル名: format_json.py  
+
+***LogWrite***  
+ファイル名: log_write.py  
+
+制限事項
+===========
+以下の制限事項が存在する。
+* 対象VMが履歴にあるかないかでログ出力の有無を判断しているため指定されている保存期間内で同じVMが対象になるとアラート出力しない。
+    * 例)対象であるVMをマイグレートし、対処した後に何らかの原因でまた同じVMが再度マイグレーション対象となった場合、保存期間がすぎるまでアラート出力されない。したがって長く設定し過ぎると検知がおくれるので注意が必要。
