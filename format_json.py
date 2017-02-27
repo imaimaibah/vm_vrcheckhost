@@ -17,7 +17,10 @@ class FormatJson:
 	def parseJson(self):
 		pass
 
-	def dumpInJson(self,ofile,data):
+	def dumpInJson(self,ofile,newData):
 		with open(ofile, 'w') as outfile:
-			outfile.write(json.dumps(data, sort_keys=True, indent=4))
+			outfile.write(json.dumps(newData, sort_keys=True, indent=4))
+
+	def displayInJson(self,data):
+		print(json.dumps(data, sort_keys=True, indent=4))
 

@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 import os
+import sys
+import collections
 from pathlib import Path
 import exec_sql
 import format_json
@@ -16,6 +18,8 @@ outputLog = "./vm_vr.log"
 
 
 if __name__ == "__main__":
+
+	### Execute EQL to obtain a new data ###
 	s = exec_sql.ExecSQL()
 	new_data = s.structDataFromSQL()
 
@@ -28,5 +32,16 @@ if __name__ == "__main__":
 	n = LogWrite(outputLog)
 	n.logWrite(new_vms)
 
-	#j.data.update(data)
-	#j.dumpInJson(outputFile,j.data)
+	dummyData = new_data.copy()
+	dummyData.update(h.data)
+	keys = sorted(dummyData, reverse=True)
+	outputData = {}
+	if sys.argv[1] == "":
+		num = 5
+	else:
+		num = int(sys.argv[1])
+	for i in keys[:num]:
+		outputData[i] = dummyData[i]
+		
+	h.dumpInJson(jsonFile,outputData)
+	#h.displayInJson(outputData)
