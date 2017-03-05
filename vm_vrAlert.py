@@ -36,10 +36,11 @@ if __name__ == "__main__":
 	dummyData.update(h.data)
 	keys = sorted(dummyData, reverse=True)
 	outputData = {}
-	if sys.argv[1] == "":
-		num = 5
-	else:
+	if len(sys.argv) > 1:
 		num = int(sys.argv[1])
+	else:
+		num = 5
+
 	for i in keys[:num]:
 		outputData[i] = dummyData[i]
 		
