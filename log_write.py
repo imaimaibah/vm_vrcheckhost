@@ -9,7 +9,7 @@ class LogWrite:
 		with open(self._logFile, 'a') as outfile:
 			for vr in newVms:
 				for vm in newVms[vr]:
-					outfile.write("{0!s} {1!s} is running on the same host where {2!s}\n".format(now,vm,vr))
+					outfile.write("{0!s} WARN {1!s} is running on the same host where {2!s}\n".format(now,vm,vr))
 
 if __name__ == "__main__":
 	pass

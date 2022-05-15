@@ -1,0 +1,3 @@
+[root@tckkejo2-vclweb11m vm_vrcheckhost]# cat  vm_vr.log
+2017/07/24 07:43:32 cent65-64-01-v-vmware-min-vm is running on the same host where r-9665-VM
+

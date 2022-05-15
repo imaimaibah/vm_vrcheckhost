@@ -1,0 +1,18 @@
+[root@tckkejo2-vclweb11m vm_vrcheckhost]# cat vm_vrResult.json
+{
+    "1500851126": {
+        "r-9665-VM": {
+            "host": "309",
+            "network_id": [
+                "297"
+            ],
+            "vm_name": [
+                "cent65-64-01-v-vmware-min-vm"
+            ]
+        }
+    },
+    "1500851822": {}
+}
+[root@tckkejo2-vclweb11m vm_vrcheckhost]# cat vm_vr.log
+2017/07/24 07:42:11 cent65-64-01-v-vmware-min-vm is running on the same host where r-9665-VM
+

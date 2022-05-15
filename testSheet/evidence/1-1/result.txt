@@ -1,0 +1,5 @@
+[root@tckkejo2-vclweb11m vm_vrcheckhost]# cat vm_vrResult.json
+{
+    "1500851822": {}
+}
+

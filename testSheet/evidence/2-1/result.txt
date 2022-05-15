@@ -1,0 +1,8 @@
+[root@tckkejo2-vclweb11m vm_vrcheckhost]# python vm_vrAlert.py
+[root@tckkejo2-vclweb11m vm_vrcheckhost]# python vm_vrAlert.py
+[root@tckkejo2-vclweb11m vm_vrcheckhost]# python vm_vrAlert.py
+[root@tckkejo2-vclweb11m vm_vrcheckhost]# python vm_vrAlert.py
+[root@tckkejo2-vclweb11m vm_vrcheckhost]# python vm_vrAlert.py
+[root@tckkejo2-vclweb11m vm_vrcheckhost]# python vm_vrAlert.py
+[root@tckkejo2-vclweb11m vm_vrcheckhost]# wc -l vm_vrResult.json
+101 vm_vrResult.json

@@ -37,10 +37,7 @@ class ExecSQL:
 			vm_instance_name = element[5]
 
 			if vr_name not in self.data:
-				self.data[vr_name] = {'host': onHost, 'network_id': {network_id}, 'vm_name':{vm_name}}
+				self.data[vr_name] = {'host': onHost, 'network_id': set([network_id]), 'vm_name':set([vm_name])}
 			else:
-				self.data[vr_name]['network_id'].update({network_id})
+				self.data[vr_name]['network_id'].update([network_id])
 				self.data[vr_name]['vm_name'].update([vm_name])
-
-
-
